@@ -25,8 +25,14 @@ public class ListarTareasPorHacerController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("NUEVO INGRESO POR LiSTARTAREASPORHACERCONTROLLER");
 		//1.- Obtener datos que me envían en la solicitud
+		HttpSession session = request.getSession();
+		if (session == null || session.getAttribute("nombreUsuario") == null) {
+            // Si no existe una sesión o el atributo "username" no está presente en la sesión,
+            // redirigir al usuario a la página de inicio de sesión (index.jsp)
+            response.sendRedirect("index.html");
+        } else {
 		
-	    HttpSession session = request.getSession();
+	    
 	    String nombreUsuario = (String) session.getAttribute("nombreUsuario");
 		
 		//2.- Llamo al Modelo para obtener datos
@@ -72,7 +78,7 @@ public class ListarTareasPorHacerController extends HttpServlet {
 
 		//3.- Llamo a la Vista
 		request.setAttribute("nombreUsuario", nombreUsuario);
-		request.getRequestDispatcher("jsp/listarTareaTH.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/listarTareaTH.jsp").forward(request, response);}
 	}
 
 
