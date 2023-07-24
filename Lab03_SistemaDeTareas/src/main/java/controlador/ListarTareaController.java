@@ -16,49 +16,58 @@ import modelo.Tarea;
 @WebServlet("/ListarTareaController")
 public class ListarTareaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("Ingreso a Listar Controller por GET");
-		//1.- Obtener datos que me envían en la solicitud
-		
-	    HttpSession session = request.getSession();
-	    String nombreUsuario = (String) session.getAttribute("nombreUsuario");
-		
-		
-		//2.- Llamo al Modelo para obtener datos
-		Tarea modeloTarea = new Tarea();
-		List<Tarea> lista = modeloTarea.getTareas();
-		
-	    for(Tarea tar:lista) {
-	    	System.out.println(tar);
-	    }
-		
-		
-		for(Tarea modeloTarea1: lista) {
-			if(modeloTarea1.getResponsable() !="0" && modeloTarea1.getResponsable() != null) {
-				
-				if(modeloTarea1.getEstado() == "0") {
-					modeloTarea1.setEstado("1");
-				}				
-			}
-			if(modeloTarea1.getResponsable()==null) {
-				modeloTarea1.setResponsable("0");
-			}
-		}
-		
-		modeloTarea.update(modeloTarea);
-		
-		
-		//3.- Llamo a la Vista
+		// 1.- Obtener datos que me envían en la solicitud
 
-		request.setAttribute("tareas", lista);
-		request.setAttribute("nombreUsuario", nombreUsuario);
-		request.getRequestDispatcher("jsp/listarTarea.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		String nombreUsuario = (String) session.getAttribute("nombreUsuario");
+		if (session == null || session.getAttribute("nombreUsuario") == null) {
+			// Si no existe una sesión o el atributo "username" no está presente en la
+			// sesión,
+			// redirigir al usuario a la página de inicio de sesión (index.jsp)
+			response.sendRedirect("index.html");
+		} else {
+
+			// 2.- Llamo al Modelo para obtener datos
+			Tarea modeloTarea = new Tarea();
+			List<Tarea> lista = modeloTarea.getTareas();
+
+			for (Tarea tar : lista) {
+				System.out.println(tar);
+			}
+
+			for (Tarea modeloTarea1 : lista) {
+				if (modeloTarea1.getResponsable() != "0" && modeloTarea1.getResponsable() != null) {
+
+					if (modeloTarea1.getEstado() == "0") {
+						modeloTarea1.setEstado("1");
+					}
+					// if(modeloTarea1.getEstado() == "2") {
+					// modeloTarea1.setNombre("TAREA COMPLETADA");
+					// }
+
+				}
+				if (modeloTarea1.getResponsable() == null) {
+					modeloTarea1.setResponsable("0");
+				}
+			}
+
+			modeloTarea.update(modeloTarea);
+
+			// 3.- Llamo a la Vista
+
+			request.setAttribute("tareas", lista);
+			request.setAttribute("nombreUsuario", nombreUsuario);
+			request.getRequestDispatcher("jsp/listarTarea.jsp").forward(request, response);
+		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 	}
 
 }

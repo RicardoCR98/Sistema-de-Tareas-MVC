@@ -13,7 +13,7 @@
 <body>
     <header class="container-header">
         <p class="container-header item-1">Gestor de Tareas</p>
-        <p class="container-header item-2 btn1"><a href="index.html">Salir</a></p>
+        <p class="container-header item-2 btn1"><a href="CerrarSesionController">Salir</a></p>
     </header>
 
     <main class="container">
