@@ -35,9 +35,9 @@ public class AuxiliarTHController extends HttpServlet {
 	        String valorCheckbox = request.getParameter("cbox-hecho-" + tar.getCodigo());
 	        // Si el valor del checkbox es "2", significa que está marcado
 	        if ("1".equals(valorCheckbox)) {
-	            tar.setEstado("2"); 
+	            tar.setEstado(2); 
 	        } else {
-	            tar.setEstado("1"); 
+	            tar.setEstado(1); 
 	        }
 	    }
 	   

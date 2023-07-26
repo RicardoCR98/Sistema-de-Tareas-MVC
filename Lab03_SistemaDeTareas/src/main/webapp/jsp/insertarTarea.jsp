@@ -13,16 +13,16 @@
 <body>
     <header class="container-header">
         <h1 class="item-1">Nueva Tarea</h1>
-        <p class="container-header item-2 btn1"><a href="../ListarTareaController">Volver</a></p>
+        <p class="container-header item-2 btn1"><a href="ListarTareaController">Volver</a></p>
     </header>
 
     <main class="container">
 
-        <form method="POST" action="../InsertarTareaController" class="form">
+        <form method="POST" action="InsertarTareaController" class="form">
 			<label for="codigo" >Código</label> <br>
-			<input type="text" name="codigo" id="codigo"class="input" size="40"/> <br>
+			<input type="text" name="codigo" id="codigo" class="input" size="40" value="${cod}" disabled style="color:#fff; text-align:center;"/><br>
 			
-			<label for="nombre">Nombre</label> <br>
+			<label for="nombre">Nombre de la Tarea</label> <br>
 			<input type="text" name="nombre" id="nombre"class="input" size="40" /> <br>
 			
             <br><br> 

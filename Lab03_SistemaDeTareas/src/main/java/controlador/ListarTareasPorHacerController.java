@@ -40,10 +40,11 @@ public class ListarTareasPorHacerController extends HttpServlet {
 		List<Tarea> lista = modeloTarea.getTareas();
 		List<Tarea> aux = new ArrayList<>();
 		
-		String nombreAux = null;
+
+		Integer nombreAux = null;
 		
 		if(nombreUsuario.equals("Pepe")) {
-			nombreAux = "1";
+			nombreAux = 2;
 			for(Tarea tar:lista) {
 				if(tar.getResponsable().equals(nombreAux)) {
 					aux.add(tar);
@@ -52,7 +53,7 @@ public class ListarTareasPorHacerController extends HttpServlet {
 			}
 			request.getSession().setAttribute("tareasUnitarias", aux);
 		}else if(nombreUsuario.equals("Maria")) {
-			nombreAux="2";
+			nombreAux=3;
 			for(Tarea tar:lista) {
 				if(tar.getResponsable().equals(nombreAux)) {
 					aux.add(tar);
@@ -61,7 +62,7 @@ public class ListarTareasPorHacerController extends HttpServlet {
 			}
 			request.getSession().setAttribute("tareasUnitarias", aux);
 		}else if(nombreUsuario.equals("Mariana")){
-			nombreAux="3";
+			nombreAux=4;
 			for(Tarea tar:lista) {
 				if(tar.getResponsable().equals(nombreAux)) {
 					aux.add(tar);
@@ -71,9 +72,9 @@ public class ListarTareasPorHacerController extends HttpServlet {
 			request.getSession().setAttribute("tareasUnitarias", aux);
 		}
 		
-	    for(Tarea tar:lista) {
-	    	System.out.println(tar);
-	    }
+		for(Tarea tar: aux) {
+			System.out.println(tar);
+		}
 	    
 
 		//3.- Llamo a la Vista

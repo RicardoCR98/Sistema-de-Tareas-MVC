@@ -39,20 +39,24 @@ public class AuxiliarController extends HttpServlet {
 	        String responsableParamName = "select-responsable-" + tarea.getCodigo();
 	        
 	        if (request.getParameterMap().containsKey(responsableParamName)) {
-	            String responsable = request.getParameter(responsableParamName);
-	            String estado = request.getParameter("estado-" + tarea.getCodigo());
-	            System.out.println("Codigo: " + tarea.getCodigo() + "Nombre: " + tarea.getNombre() + ", Responsable: " + responsable + ", Estado: " + estado);
+	            Integer responsable = Integer.parseInt(request.getParameter(responsableParamName));
+	            Integer estado = Integer.parseInt(request.getParameter("estado-" + tarea.getCodigo()));
 	            tarea.setResponsable(responsable);
+	            if(responsable!=1) {
+	            	tarea.setEstado(estado);
+	            }else if(responsable ==1) {
+	            	tarea.setEstado(0);
+	            }
 	        }
+	    }
+	    
+	    for (Tarea tarea : listaTareas) {
+	        System.out.println(tarea.toString());
 	    }
 
 	    //2.- Llamar al método update de la clase Tarea para actualizar la lista existente
 	    for (Tarea tarea : listaTareas) {
 	        modeloTarea.update(tarea);
-	    }
-	    
-	    for(Tarea tar:listaTareas) {
-	    	System.out.println(tar);
 	    }
 
 	    //3.- Llamar a la Vista

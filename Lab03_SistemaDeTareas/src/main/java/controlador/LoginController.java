@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
 		//2.- Llamo al modelo  para obtener los datos (¿necesito lamar al modelo?)
 		Persona modeloPersona= new Persona();
 		Persona personaAutenticada = modeloPersona.autorizar(nombre, clave);
-		
+		System.out.println(personaAutenticada.toString());
 		if(personaAutenticada != null) {
 			
 			//Creamos la sesion
@@ -47,8 +47,10 @@ public class LoginController extends HttpServlet {
 			
 			// Almacenamos el nombre del usuario en la sesión
 	        session.setAttribute("nombreUsuario", nombre);
+	        
+	        
 			//Llamamos a la vista
-	        if ("Luis".equals(nombre)) {
+	        if (personaAutenticada.getEsadmin()) {
 	            response.sendRedirect("ListarTareaController");
 	        } else {
 	            response.sendRedirect("ListarTareasPorHacerController");

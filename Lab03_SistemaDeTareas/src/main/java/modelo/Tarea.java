@@ -1,16 +1,26 @@
 package modelo;
 
 import java.io.Serializable;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Tarea implements Serializable {
 	
 	private static final long serialVersionUID =1L;
+	
+	final String SQL_SELECT_ALL = "SELECT * FROM tarea;";
+	final String SQL_SELECT_BY_ID = "SELECT * FROM tarea WHERE id = ?";
+	final String SQL_INSERT = "INSERT INTO tarea (nombre, idresponsable,estado) VALUES (?,?,?)";
+	final String SQL_DELETE_BY_ID = "DELETE FROM persona WHERE id = ?";
+	final String SQL_UPDATE = "UPDATE tarea SET nombre = ? , idresponsable = ?, estado=? WHERE id= ?";
+	
 	private Integer codigo;
 	private String nombre;
-	private String responsable;
-	private String estado;
+	private Integer responsable;
+	private Integer estado;
 	
 	private static List<Tarea> tareas = null;
 	
@@ -18,7 +28,7 @@ public class Tarea implements Serializable {
 		
 	}
 
-	public Tarea(Integer codigo, String nombre, String responsable, String estado) {
+	public Tarea(Integer codigo, String nombre, Integer responsable, Integer estado) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -42,19 +52,19 @@ public class Tarea implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getResponsable() {
+	public Integer getResponsable() {
 		return responsable;
 	}
 
-	public void setResponsable(String responsable) {
+	public void setResponsable(Integer responsable) {
 		this.responsable = responsable;
 	}
 
-	public String getEstado() {
+	public Integer getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
 
@@ -74,12 +84,20 @@ public class Tarea implements Serializable {
 		//2 -> Maria
 		//3 -> Mariana
 		
+		//Para el phpMyadmin
+		// 0 -> Seleccione
+		// 1 -> Luis
+		// 2 -> Pepe
+		// 3 -> Maria
+		// 4 -> Mariana
+		
 		// 0 -> Por asignar
 		// 1 -> Por hacer
 		// 2 -> Completado
 		
 		//if (responsable != 0){ estado = "Por hacer" }
-		if(tareas ==null) {
+		
+		/*if(tareas ==null) {
 			tareas = new ArrayList<>();
 			tareas.add(new Tarea(1, "Pagar salarios" ,"1" ,"1"));
 			tareas.add(new Tarea(2, "Becas por excelencia" ,"3" ,"1"));
@@ -89,16 +107,52 @@ public class Tarea implements Serializable {
 			tareas.add(new Tarea(12, "Becas 2" ,"3" ,"1"));
 			tareas.add(new Tarea(6, "Becas 3" ,"3" ,"1"));
 		}
-		return tareas;
+		return tareas;*/
+		List<Tarea> listaTarea = new ArrayList<>();
+		try {
+			PreparedStatement pstm = BddConnection.getConnection().prepareStatement(SQL_SELECT_ALL);
+			ResultSet rs = pstm.executeQuery();
+
+			while (rs.next()) {
+				Tarea tarea = new Tarea();
+				tarea.setCodigo(rs.getInt("id"));
+				tarea.setNombre(rs.getString("nombre"));
+				tarea.setResponsable(rs.getInt("idresponsable"));
+				tarea.setEstado(rs.getInt("estado"));
+				listaTarea.add(tarea);
+			}
+			BddConnection.cerrar(rs);
+			BddConnection.cerrar(pstm);
+			BddConnection.cerrar();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaTarea;
 	}
 
 	//Agregar tarea
-	public void create(Tarea p) {
-		this.getTareas().add(p);
+	public void create(Tarea t) {
+		this.getTareas().add(t);
+		
+		try {
+			PreparedStatement pstm = BddConnection.getConnection().prepareStatement(SQL_INSERT);
+			pstm.setString(1, t.getNombre());
+			pstm.setInt(2, t.getResponsable());
+			pstm.setInt(3, t.getEstado());
+			pstm.executeUpdate();
+
+			BddConnection.cerrar(pstm);
+			BddConnection.cerrar();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}    
     //Update
     
 	public void update(Tarea t) {
+		
 	    List<Tarea> listTarea = this.getTareas();
 
 	    for (Tarea tarea : listTarea) {
@@ -109,6 +163,21 @@ public class Tarea implements Serializable {
 	            break;
 	        }
 	    }
+		
+		try {
+			PreparedStatement pstm= BddConnection.getConnection().prepareStatement(SQL_UPDATE);
+			pstm.setString(1, t.getNombre());
+			pstm.setInt(2, t.getResponsable());
+			pstm.setInt(3, t.getEstado());
+			pstm.setInt(4, t.getCodigo());
+			
+			pstm.executeUpdate();
+			
+			BddConnection.cerrar(pstm);
+			BddConnection.cerrar();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
     // Busqueda de tarea por ID

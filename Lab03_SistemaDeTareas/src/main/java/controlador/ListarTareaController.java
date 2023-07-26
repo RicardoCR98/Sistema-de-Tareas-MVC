@@ -17,8 +17,7 @@ import modelo.Tarea;
 public class ListarTareaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Ingreso a Listar Controller por GET");
 		// 1.- Obtener datos que me envían en la solicitud
 
@@ -34,28 +33,22 @@ public class ListarTareaController extends HttpServlet {
 			// 2.- Llamo al Modelo para obtener datos
 			Tarea modeloTarea = new Tarea();
 			List<Tarea> lista = modeloTarea.getTareas();
+			
+			for (Tarea modeloTarea1 : lista) {
+				if (modeloTarea1.getResponsable() != 1 && modeloTarea1.getResponsable() != null) {
 
+					if (modeloTarea1.getEstado() == 0 || modeloTarea1.getEstado()==null) {
+						modeloTarea1.setEstado(1);
+					}
+					
+				}else if (modeloTarea1.getResponsable()==1 || modeloTarea1.getResponsable() == null) {
+					modeloTarea1.setEstado(0);
+				}
+			}
 			for (Tarea tar : lista) {
+				modeloTarea.update(tar);
 				System.out.println(tar);
 			}
-
-			for (Tarea modeloTarea1 : lista) {
-				if (modeloTarea1.getResponsable() != "0" && modeloTarea1.getResponsable() != null) {
-
-					if (modeloTarea1.getEstado() == "0") {
-						modeloTarea1.setEstado("1");
-					}
-					// if(modeloTarea1.getEstado() == "2") {
-					// modeloTarea1.setNombre("TAREA COMPLETADA");
-					// }
-
-				}
-				if (modeloTarea1.getResponsable() == null) {
-					modeloTarea1.setResponsable("0");
-				}
-			}
-
-			modeloTarea.update(modeloTarea);
 
 			// 3.- Llamo a la Vista
 
