@@ -27,7 +27,6 @@ public class LoginController extends HttpServlet {
 		//3.- LLamo a la vista (2 formas: dispatcher o sendredirequet)
 		//Preguntarse ¿debo llamar datos? -> no -> entonces uso sendredirequet
 		//si-> usar dispatcher
-		
 		response.sendRedirect("jsp/login.jsp");
 	}
 

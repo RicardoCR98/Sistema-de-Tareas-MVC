@@ -10,7 +10,7 @@
 </head>
 <body class="container-1">
     <div class="container-11">
-        <h1>SISTEMA DE TAREAS MVC</h1>
+        <h1>SISTEMA DE TAREAS</h1>
     </div>
     <div class="container-2">
         <form action="../LoginController" method="POST" class="form">
@@ -28,11 +28,7 @@
     </div>
 
     <footer class="container-3">
-        <p>Integrantes:</p>
-            <p>Lisbeth Dayana Romo Gavilanes</p>
-            <p>Jhoaho Gabriel Sánchez Cabrera</p>
-            <p>Roberto Ricardo Sosa Salazar</p>
-            <p>Gary Ricardo Campana Ramírez </p>    
+        <p>Ricardo Campaña</p>
     </footer>
 </body>
 </html>
