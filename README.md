@@ -1,4 +1,26 @@
-Script Xampp Database: 
+# Lab03 - Sistema de Tareas
+
+Este proyecto es una aplicación web construida en **Java** que permite gestionar tareas asignadas a diferentes usuarios. La aplicación está desarrollada utilizando tecnologías como **Java Servlets** y **JSP** (JavaServer Pages), lo que facilita la interacción entre el backend y las vistas. El proyecto utiliza **Apache Tomcat 9.x** como servidor de aplicaciones, **Maven** para la gestión de dependencias, y **XAMPP** como servidor local para la base de datos **MySQL**.
+
+## Requisitos Previos
+
+Antes de comenzar, asegúrate de tener lo siguiente instalado y configurado en tu sistema:
+
+- **Java 22**
+- **Apache Maven 3.9.x**
+- **Apache Tomcat 9.x**
+- **XAMPP** (con el servidor de MySQL activado)
+- Un IDE como **IntelliJ IDEA** (o cualquier otro de tu preferencia)
+- Navegador web
+
+## Configuración de la Base de Datos
+
+El proyecto utiliza una base de datos MySQL llamada `gestorpersonasstmvc`. Puedes configurar la base de datos utilizando **XAMPP** para MySQL y ejecutar los siguientes scripts SQL en **phpMyAdmin** o cualquier otra herramienta de gestión de bases de datos compatible.
+
+### Crear Base de Datos y Tablas
+
+Aquí tienes un ejemplo del script:
+
 ```sql
 -- Crear base de datos
 CREATE DATABASE IF NOT EXISTS gestorpersonasstmvc;
@@ -41,5 +63,9 @@ INSERT INTO tarea (nombre, idresponsable, estado) VALUES
 -- Consultas de ejemplo
 SELECT * FROM persona;
 SELECT * FROM tarea;
-
 ```
+## Configuración del Servidor Tomcat
+
+Aquí tienes una imagen de la configuración de Tomcat que debes seguir:
+
+![Configuración de Tomcat](./Images/img.png)
