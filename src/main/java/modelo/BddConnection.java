@@ -12,16 +12,19 @@ public class BddConnection {
 	//Singleton tiene constructor privado
 	
 	private BddConnection() {
-		String servidor = "localhost";
+		String servidor = "localhost"; // db for docker - localhost default
 		String database = "gestorpersonasstmvc";
-		String usuario = "root";
-		String password = "";
-		String url = "jdbc:mysql://" + servidor+"/" + database;
+		String usuario = "root"; //app_user - docker
+		String password = ""; // app_password - docker
+		String url = "jdbc:mysql://" + servidor + ":3306/" + database+"?useSSL=false";
+		System.out.println(url);
 		try {
 			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 			cnn = DriverManager.getConnection(url,usuario,password);
 			System.out.println("Conexion exitosa");
+			System.out.println(url);
 		} catch (SQLException e) {
+			System.out.println(url);
 			System.out.println("Error de conexion!!");
 			e.printStackTrace();
 		}

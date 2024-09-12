@@ -68,13 +68,13 @@ SELECT * FROM tarea;
 
 Aquí tienes una imagen de la configuración de Tomcat que debes seguir:
 
-![Configuración de Tomcat](./Images/img.png)
+![Configuración de Tomcat](./Images/Readme_Config.png)
 
 ## Capturas de pantalla de la aplicación
 
 Iniciamos sesión como administrador (La captura de pantalla es un ejemplo de adminsitrador)
 
-![Login as admin](./Images/Login.png)
+![Login as admin](./Images/Readme_Login.png)
 
 ### Login as Admin
 
@@ -84,26 +84,26 @@ Aqui podemos seleccionar la tarea y el responsable que va a realizarla, así mis
 - Por hacer
 - Completado
  
-![Tareas as admin](./Images/Task_Admin.png)
+![Tareas as admin](./Images/Readme_TaskAdmin.png)
 
 Además podemos agregar nuevas tareas para nuevos usuarios (El id se genera automáticamente)
 
-![Nueva tarea](./Images/New_Task.png)
+![Nueva tarea](./Images/Readme_NewTask.png)
 Tarea visualizada en la lista de tareas
-![Task](./Images/Task.png)
+![Task](./Images/Readme_Task.png)
 
 
 ### Login as User
 Primero nos logeamos como uno de los usuarios
 
-![Login as User](./Images/Login_User.png)
+![Login as User](./Images/Readme_LoginUser.png)
 
 Luego observamos las tareas que tiene asignado el usuario donde este tendrá la opción de dar en check si 
 la tarea la completó:
 
-![Task User](./Images/Task_complete.png)
+![Task User](./Images/Readme_TaskComplete.png)
 
 Seguido a esto, el panel del administrador se actualizará y el estado 
 se encontrará en completado:
 
-![Task_Complete](./Images/Task_complete_Admin.png)
+![Task_Complete](./Images/Readme_TaskCompleteAdmin.png)
