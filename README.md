@@ -2,6 +2,10 @@
 
 Este proyecto es una aplicación web construida en **Java** que permite gestionar tareas asignadas a diferentes usuarios. La aplicación está desarrollada utilizando tecnologías como **Java Servlets** y **JSP** (JavaServer Pages), lo que facilita la interacción entre el backend y las vistas. El proyecto utiliza **Apache Tomcat 9.x** como servidor de aplicaciones, **Maven** para la gestión de dependencias, y **XAMPP** como servidor local para la base de datos **MySQL**.
 
+## Arquitectura básica del programa
+
+![mvc](https://github.com/user-attachments/assets/dbaf634e-b381-40e1-a346-16da058bfb5b)
+
 ## Requisitos Previos
 
 Antes de comenzar, asegúrate de tener lo siguiente instalado y configurado en tu sistema:
